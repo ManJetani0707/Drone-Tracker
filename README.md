@@ -249,10 +249,12 @@ def _relay(self, cmd: Twist):
 
 | Name | Role | Skills |
 |---|---|---|
-| Member 1 | Team Lead / ROS Developer | ROS 2, Python, System Design |
-| Member 2 | CV & AI Engineer | YOLOv8, OpenCV, Kalman Filter |
-| Member 3 | Controls Engineer | PID, MAVROS, ArduPilot, PX4 |
-| Member 4 | Simulation & DevOps | Gazebo, RViz, WSL2, CI/CD |
+| Niharika Pandey | Team Lead|
+| Kanishka Kumari | Member | 
+| Pratham Trivedi | Member |
+| Bhavya Gohel|
+| Man Jetani | Member |
+| Aaryan Solanki | Member |
 
 ---
 
