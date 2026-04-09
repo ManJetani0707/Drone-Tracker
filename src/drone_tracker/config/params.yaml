@@ -1,0 +1,64 @@
+# ============================================================
+# drone_tracker — simulation parameters
+# ============================================================
+# All values are tuned for a Gazebo simulation environment.
+# Adjust PID gains if you port to real hardware.
+
+/**:
+  ros__parameters:
+    use_sim_time: true
+
+detection:
+  ros__parameters:
+    target_model: walking_actor
+    detection_noise_px: 5.0       # Gaussian noise std dev in pixels
+    false_negative_rate: 0.05     # 5% probability of a missed detection
+    detection_hz: 30.0
+
+tracker:
+  ros__parameters:
+    max_lost_frames: 15           # frames before track declared lost
+    detection_hz: 30.0
+
+pid_controller:
+  ros__parameters:
+    # Yaw PID — centroid x-error → angular.z (rad/s)
+    yaw:
+      kp: 0.8
+      ki: 0.02
+      kd: 0.15
+
+    # Altitude PID — centroid y-error → linear.z (m/s)
+    alt:
+      kp: 0.6
+      ki: 0.01
+      kd: 0.10
+
+    # Forward PID — area error → linear.x (m/s)
+    fwd:
+      kp: 1.2
+      ki: 0.05
+      kd: 0.20
+
+    # Desired apparent area of target bounding box (0..1)
+    # 0.04 ≈ target fills ~20% of image height → ~4–6 m distance
+    target_area: 0.04
+
+    lost_timeout_sec: 1.5
+    max_fwd_speed:    3.0
+    max_yaw_rate:     1.2
+    max_climb_rate:   1.0
+
+flight_bridge:
+  ros__parameters:
+    start_x: 0.0
+    start_y: -12.0
+    start_z: 5.0
+    start_yaw: 1.5707963   # π/2 — face +Y where target starts
+    tau_velocity: 0.15     # velocity lag (simulates attitude loop)
+    max_speed: 6.0
+    update_hz: 50.0
+
+visualizer:
+  ros__parameters:
+    history_length: 300

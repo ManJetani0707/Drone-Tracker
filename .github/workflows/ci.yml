@@ -1,0 +1,71 @@
+name: CI — DroneTrackAI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    name: Build & Smoke Test
+    runs-on: ubuntu-22.04
+    container:
+      image: ros:humble
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install ROS 2 dependencies
+        run: |
+          apt-get update -qq
+          apt-get install -y \
+            ros-humble-cv-bridge \
+            ros-humble-tf2-ros \
+            ros-humble-launch-ros \
+            ros-humble-geometry-msgs \
+            ros-humble-visualization-msgs \
+            ros-humble-std-msgs \
+            python3-colcon-common-extensions \
+            python3-pip
+          pip3 install numpy opencv-python
+
+      - name: Build package
+        run: |
+          . /opt/ros/humble/setup.sh
+          colcon build \
+            --packages-select drone_tracker \
+            --cmake-args -DCMAKE_BUILD_TYPE=Release
+        working-directory: ${{ github.workspace }}
+
+      - name: Verify all nodes present
+        run: |
+          . /opt/ros/humble/setup.sh
+          . install/setup.sh
+          for node in detection_node.py tracker_node.py pid_controller_node.py \
+                      flight_bridge_node.py visualizer_node.py; do
+            if ros2 pkg executables drone_tracker | grep -q "$node"; then
+              echo "✅ $node found"
+            else
+              echo "❌ $node MISSING"
+              exit 1
+            fi
+          done
+        working-directory: ${{ github.workspace }}
+
+      - name: Smoke test — headless launch (10 sec)
+        run: |
+          . /opt/ros/humble/setup.sh
+          . install/setup.sh
+          timeout 10 ros2 launch drone_tracker simulation.launch.py \
+            use_gazebo:=false rviz:=false log_level:=warn \
+            || [ $? -eq 124 ]
+        working-directory: ${{ github.workspace }}
+
+      - name: Lint Python
+        run: |
+          pip3 install flake8
+          flake8 src/drone_tracker/drone_tracker/ \
+            --max-line-length=100 \
+            --ignore=E501,W503,E302,E303

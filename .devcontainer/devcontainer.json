@@ -1,0 +1,25 @@
+{
+  "name": "DroneTrackAI — ROS 2 Humble (Team NOS)",
+  "image": "ros:humble",
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-iot.vscode-ros",
+        "ms-vscode.cpptools",
+        "redhat.vscode-yaml",
+        "ms-python.black-formatter",
+        "github.copilot"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/bin/python3",
+        "editor.formatOnSave": true,
+        "ros.distro": "humble",
+        "editor.rulers": [100]
+      }
+    }
+  },
+  "remoteEnv": { "ROS_DISTRO": "humble" },
+  "runArgs": ["--network=host"]
+}
