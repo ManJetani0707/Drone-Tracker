@@ -5,7 +5,7 @@
 [![ROS 2 Humble](https://img.shields.io/badge/ROS2-Humble-blue?logo=ros&logoColor=white)](https://docs.ros.org/en/humble/)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-green?logo=python&logoColor=white)](https://www.python.org/)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-yellow.svg)](LICENSE)
-[![CI](https://github.com/team-nos/drone-tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/team-nos/drone-tracker/actions)
+
 [![WSL2 Compatible](https://img.shields.io/badge/Windows-WSL2%20Compatible-0078D6?logo=windows)](https://docs.microsoft.com/en-us/windows/wsl/)
 [![Simulation](https://img.shields.io/badge/Mode-Simulation%20%2B%20Hardware--Ready-orange)](README.md)
 
