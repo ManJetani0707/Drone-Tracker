@@ -247,14 +247,6 @@ def _relay(self, cmd: Twist):
 
 ## 👥 Team NOS
 
-| Name | Role |
-|---|---|---|
-| Niharika Pandey | Team Lead |
-| Kanishka Kumari | Member | 
-| Pratham Trivedi | Member |
-| Bhavya Gohel | Member |
-| Man Jetani | Member |
-| Aaryan Solanki | Member |
 
 ---
 
